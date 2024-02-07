@@ -97,7 +97,8 @@ Things to consider for the previous script:
 
 
 
-Step 3) Run BLAST with Dani later this week using _Nerodia clarkii_ as our query, against concatenated database file containing opsin genes and Nerodia-specific genes
+_The following code was created by Amanda Markee to do the same function as the previouse code but using enviromental varibales. (not sure how this works- I need to ask her)_
+
 ```
 #!/bin/bash
 #PBS -V
@@ -126,7 +127,7 @@ blastx -query ${inputfasta} \
 ```
 
 
-I will leave this here in case I have to go back to this script that will grab all the genes identified for Natricidae
+_I will leave this here in case I have to go back to this script that will grab all the genes identified for Natricidae_
 
 ```
 # script for pulling Nerodia gene protein seqs from NCBI for tblastn step
@@ -153,12 +154,6 @@ export NCBI_API_KEY="25de463246b0746c402efd4ffdc45f70fe09"
 
 ## Retrieve opsin protein and mRNA sequences from NCBI
 esearch -db protein -query "Natricidae [ORGN]" -api_key $NCBI_API_KEY | efetch -format fasta > Natricidae_protein.fasta
-```
-
-Step 2) Transfer edirect database files from UF cluster to AMNH cluster using file transfer tool (ie. Cybeduck, Filezilla, etc.)
-```
-# directory containing both opsin_protein.fasta and Natricidae_protein.fasta
-/home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files
 ```
 
 
