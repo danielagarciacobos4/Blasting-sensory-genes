@@ -20,7 +20,7 @@ Relevant file locations
 
 Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
 
-Script for pulling these genes from NCBI using [the edirect package](https://www.nlm.nih.gov/dataguide/edirect/documentation.html) in commandline. This script uses the esearch function to query for particular taxa or gene name, and then pipes the search results into the efetch function, which saves the results into a fasta locally. Our cluster at AMNH does not have the edirect package, so we will have to request it to be downloaded. For now, we will run it on the UF cluster, searching for both opsin genes, and all genes within the family Natricidae.
+Script for pulling these genes from NCBI using [the edirect package](https://www.nlm.nih.gov/dataguide/edirect/documentation.html) in commandline. This script uses the esearch function to query for particular taxa or gene name, and then pipes the search results into the efetch function, which saves the results into a fasta locally. Our cluster at AMNH does not have the edirect package, so we will have to request it to be downloaded. 
 
 ```
 # script for pulling opsin gene protein seqs from NCBI for tblastn step within the Huxley cluster- AMNH (using a PBS submission language) 
@@ -51,6 +51,43 @@ Important notes to consider about the previous script:
 - Our outcome look something like this:
 <img width="594" alt="Screenshot 2024-02-06 at 5 07 51 PM" src="https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/c9a64bdf-3af9-47fc-83c3-8f372265ed3e">
 
+
+Step 2) Transfer edirect database files from UF cluster to AMNH cluster using file transfer tool (ie. Cybeduck, Filezilla, etc.)
+```
+# directory containing both opsin_protein.fasta and Natricidae_protein.fasta
+/home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files
+```
+
+Step 3) Run BLAST with Dani later this week using _Nerodia clarkii_ as our query, against concatenated database file containing opsin genes and Nerodia-specific genes
+```
+#!/bin/bash
+#PBS -V
+#PBS -q batch 
+#PBS -l select=1:ncpus=25
+#PBS -o $PBS_OUT_DIR
+#PBS -e $PBS_ERR_DIR
+#PBS -M $PBS_EMAIL
+#PBS -m abe
+#PBS -N blastx_aarg
+#PBS -l walltime=9999:00:00
+
+module load ncbi-blast-2.12.0+
+
+inputfasta=${1}
+blastdb=${2}
+outputfile=${3}
+
+
+blastx -query ${inputfasta} \
+-db ${blastdb} \
+-outfmt 6 \
+-max_target_seqs 200 \
+-evalue 1e-15 \
+-out ${outputfile}
+```
+
+
+I will leave this here in case I have to go back to this script that will grab all the genes identified for Natricidae
 
 ```
 # script for pulling Nerodia gene protein seqs from NCBI for tblastn step
