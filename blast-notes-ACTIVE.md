@@ -18,7 +18,7 @@ Relevant file locations
 ### BLAST Workflow
 #### 1. Opsin-related genes
 
-Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
+##### Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
 
 Script for pulling these genes from NCBI using [the edirect package](https://www.nlm.nih.gov/dataguide/edirect/documentation.html) in commandline. This script uses the esearch function to query for particular taxa or gene name, and then pipes the search results into the efetch function, which saves the results into a fasta locally. Our cluster at AMNH does not have the edirect package, so we will have to request it to be downloaded. 
 
@@ -49,14 +49,34 @@ Important notes to consider about the previous script:
 - We are indicating the path where we are going to save our results by inserting "cd /home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files"
 - We can count the number of matches by running "grep ">" -c opsin_protein_v2.fasta". In this case we found a match of 469
 - Our outcome look something like this:
+  
 <img width="594" alt="Screenshot 2024-02-06 at 5 07 51 PM" src="https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/c9a64bdf-3af9-47fc-83c3-8f372265ed3e">
 
+#### Step 2) Change our protein fasta file into a database file
 
-Step 2) Transfer edirect database files from UF cluster to AMNH cluster using file transfer tool (ie. Cybeduck, Filezilla, etc.)
+Blast will not run against a fasta file. This is why we have to transform our fasta file into a database using the following command: 
+
 ```
-# directory containing both opsin_protein.fasta and Natricidae_protein.fasta
+makeblastdb -in <database>.fa -dbtype prot
+makeblastdb -in /home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files/opsin_protein_snakes.fasta -dbtype prot
+
+```
+The output of this command will be different types of files. Something like this: 
+
+<img width="726" alt="Screenshot 2024-02-07 at 12 05 25 PM" src="https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/25c0286c-905d-4693-bb04-238042438cf4">
+
+
+##### Step 3) Run blast using the assembled genomes of _Nerodia clarkii_ (sequenced and assembled by Leroy Nunez) as our query against the opsin gene db of snakes
+
+```
+# directory containing both opsin_protein.fasta
 /home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files
 ```
+
+
+Now we will blast 
+
+
 
 Step 3) Run BLAST with Dani later this week using _Nerodia clarkii_ as our query, against concatenated database file containing opsin genes and Nerodia-specific genes
 ```
