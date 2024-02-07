@@ -15,10 +15,9 @@ Relevant file locations
 ### Genome assembly background information
 [add from Dylan's pseudo-it shoer-read assembly pipeline later, credit her]
 
-### BLAST Workflow
-#### 1. Opsin-related genes
+### BLAST Workflow for opsin related genes
 
-##### Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
+#### Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
 
 Script for pulling these genes from NCBI using [the edirect package](https://www.nlm.nih.gov/dataguide/edirect/documentation.html) in commandline. This script uses the esearch function to query for particular taxa or gene name, and then pipes the search results into the efetch function, which saves the results into a fasta locally. Our cluster at AMNH does not have the edirect package, so we will have to request it to be downloaded. 
 
@@ -66,15 +65,35 @@ The output of this command will be different types of files. Something like this
 <img width="726" alt="Screenshot 2024-02-07 at 12 05 25 PM" src="https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/25c0286c-905d-4693-bb04-238042438cf4">
 
 
-##### Step 3) Run blast using the assembled genomes of _Nerodia clarkii_ (sequenced and assembled by Leroy Nunez) as our query against the opsin gene db of snakes
+#### Step 3) Run blast using the assembled genomes of _Nerodia clarkii_ (sequenced and assembled by Leroy Nunez) as our query against the opsin gene db of snakes
+
+Now we will run the blast between the _Nerodia clarkii_ genome and protein database containing all the searches of snake's opsins in NCBI. 
 
 ```
-# directory containing both opsin_protein.fasta
-/home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files
+!/bin/bash
+#PBS -q batch
+#PBS -l select=1:ncpus=25
+#PBS -m abe
+#PBS -o /home/dgarcia/nas4/thamnophini_genomes/TMP/Th.olog
+#PBS -e /home/dgarcia/nas4/thamnophini_genomes/TMP/Th.elog
+#PBS -M dgarcia@amnh.org
+#PBS -q batch
+#PBS -N opsin
+#PBS -l walltime=6:00:00
+
+cd /home/dgarcia/nas4/thamnophini_genomes/blast_scripts
+
+module load ncbi-blast-2.12.0+
+
+blastx -query /home/dgarcia/nas4/thamnophini_genomes/Nerodia_clarkii_AMNH_R500948_sma.fa -db /home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files/opsin_protein_snakes.fasta -outfmt 6 -max_target_seqs 200 -evalue 1e-5 -out /home/dgarcia/nas4/thamnophini_genomes/blast_results/results.txt
+
 ```
 
+Things to consider for the previous script: 
+- Joe Arguelles suggested creating a TMP folder that will hold all my output errors and notifications. This way, once the job is finished I can just eliminate this folder (#PBS -o and #PBS -e),
+- outfmt 6 is a type of format in which my results will be executed. For more information search [the manual](https://www.ncbi.nlm.nih.gov/books/NBK279684/table/appendices.T.options_common_to_all_blast/)
 
-Now we will blast 
+
 
 
 
@@ -142,30 +161,4 @@ Step 2) Transfer edirect database files from UF cluster to AMNH cluster using fi
 /home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files
 ```
 
-Step 3) Run BLAST with Dani later this week using _Nerodia clarkii_ as our query, against concatenated database file containing opsin genes and Nerodia-specific genes
-```
-#!/bin/bash
-#PBS -V
-#PBS -q batch 
-#PBS -l select=1:ncpus=25
-#PBS -o $PBS_OUT_DIR
-#PBS -e $PBS_ERR_DIR
-#PBS -M $PBS_EMAIL
-#PBS -m abe
-#PBS -N blastx_aarg
-#PBS -l walltime=9999:00:00
 
-module load ncbi-blast-2.12.0+
-
-inputfasta=${1}
-blastdb=${2}
-outputfile=${3}
-
-
-blastx -query ${inputfasta} \
--db ${blastdb} \
--outfmt 6 \
--max_target_seqs 200 \
--evalue 1e-15 \
--out ${outputfile}
-```
