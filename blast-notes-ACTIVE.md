@@ -92,6 +92,7 @@ blastx -query /home/dgarcia/nas4/thamnophini_genomes/Nerodia_clarkii_AMNH_R50094
 Things to consider for the previous script: 
 - Joe Arguelles suggested creating a TMP folder that will hold all my output errors and notifications. This way, once the job is finished I can just eliminate this folder (#PBS -o and #PBS -e),
 - outfmt 6 is a type of format in which my results will be executed. For more information search [the manual](https://www.ncbi.nlm.nih.gov/books/NBK279684/table/appendices.T.options_common_to_all_blast/)
+- more on the output format 6 [outfmt 6](https://www.metagenomics.wiki/tools/blast/blastn-output-format-6). Note for next time I do blast: include the "sacc" command to get more straight forward genes names in the output.
 
 
 
