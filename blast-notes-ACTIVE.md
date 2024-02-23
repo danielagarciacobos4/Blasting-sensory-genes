@@ -94,11 +94,22 @@ Things to consider for the previous script:
 - outfmt 6 is a type of format in which my results will be executed. For more information search [the manual](https://www.ncbi.nlm.nih.gov/books/NBK279684/table/appendices.T.options_common_to_all_blast/)
 - more on the output format 6 [outfmt 6](https://www.metagenomics.wiki/tools/blast/blastn-output-format-6). Note for next time I do blast: include the "sacc" command to get more straight forward genes names in the output.
 
+I ran this same code for 4 species finding the following general results: 
+- _Nerodia clarkii_: 7143 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
+- _Thamnophis eques_: 7159 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
+- _Regina grahamii_: 7160 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
+- _Tropidoclonion lineatum_: 6828 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_) 
 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
 
-
-
-_The following code was created by Amanda Markee to do the same function as the previouse code but using enviromental varibales. (not sure how this works- I need to ask her)_
+_The following code was created by Amanda Markee to do the same function as the previous code but using environmental variables. (not sure how this works- I need to ask her)_
 
 ```
 #!/bin/bash
