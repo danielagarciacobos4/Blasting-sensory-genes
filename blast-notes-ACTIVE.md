@@ -100,6 +100,16 @@ I ran this same code for 4 species finding the following general results:
 - _Regina grahamii_: 7160 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
 - _Tropidoclonion lineatum_: 6828 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_) 
 
+## Second blasting tblastn
+As we can see, our results show a great amount of hits (around 7,000), which makes it difficult to analyze. For this reason, we will try to filter the amount of hits by doing a different search in BLAST (recommended by Jeff W.). In this second approach we will change two main things: 
+- 1) We will use the snake's opsin protein fasta file as the query and the whole genome assembly as the database (in the steps before, we were using the genome as query and protein data files as the database)
+- 2) We will perform a tblastn command (in the steps before, we were using an blastx command). Just to have a reminder of the possible blast searches available dependings of the datasets (this image is not mine, [credits] https://slideplayer.com/slide/13408600/): 
+![Screenshot 2024-02-23 at 6 51 31 PM](https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/213dddb9-9ade-4b8f-af6f-395576110481)
+
+
+```
+makeblastdb -in /home/dgarcia/nas4/thamnophini_genomes/Nerodia_clarkii_AMNH_R500948_sma.fa -dbtype nucl
+```
 . 
 . 
 . 
