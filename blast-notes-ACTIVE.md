@@ -110,7 +110,8 @@ As we can see, our results show a great amount of hits (around 7,000), which mak
 ```
 makeblastdb -in /home/dgarcia/nas4/thamnophini_genomes/Nerodia_clarkii_AMNH_R500948_sma.fa -dbtype nucl
 ```
-. 
+##include a reminder to search for cds regions with the reverse compliment. Could this be the reason it did not work before?
+
 . 
 . 
 . 
