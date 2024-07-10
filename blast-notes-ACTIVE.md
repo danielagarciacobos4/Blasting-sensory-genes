@@ -129,13 +129,18 @@ Things to consider for the previous script:
 - outfmt 6 is a type of format in which my results will be executed. For more information search [the manual](https://www.ncbi.nlm.nih.gov/books/NBK279684/table/appendices.T.options_common_to_all_blast/)
 - more on the output format 6 [outfmt 6](https://www.metagenomics.wiki/tools/blast/blastn-output-format-6). Note for next time I do blast: include the "sacc" command to get more straight forward genes names in the output.
 
-I ran this same code for the following species obtaining the following BLAST hits: 
+An example of number of hits for some of the species I ran the code for:
 - _Liodytes alleni_: 1554 hits
 - _Nerodia clarkii_: 1533 hits
 - _Clonophis kirtlandii_: 1529 hits
 - _Natrix natrix_: 1559 hits 
 - _Regina grahamii_: 1522 hits
 - _Tropidoclonion lineatum_: 1539
+
+## Step 4) Filter the best hits from step 3 (sort and eliminate duplicated coordinates)
+The ~ 1500 hits in the genomes will contain duplicated coordinated or very nearby coordinates. We want to sort and reduce the best unique coordinates. For this, we need to sort and eliminate duplicates. The following steps are done in EXCEL (ideally we can find another way to optimize this step). 
+-
+
 
 
 
