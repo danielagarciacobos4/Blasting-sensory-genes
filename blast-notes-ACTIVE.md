@@ -120,34 +120,6 @@ makeblastdb -in /home/dgarcia/nas4/thamnophini_genomes/Nerodia_clarkii_AMNH_R500
 . 
 . 
 
-_The following code was created by Amanda Markee to do the same function as the previous code but using environmental variables. (not sure how this works- I need to ask her)_
-
-```
-#!/bin/bash
-#PBS -V
-#PBS -q batch 
-#PBS -l select=1:ncpus=25
-#PBS -o $PBS_OUT_DIR
-#PBS -e $PBS_ERR_DIR
-#PBS -M $PBS_EMAIL
-#PBS -m abe
-#PBS -N blastx_aarg
-#PBS -l walltime=9999:00:00
-
-module load ncbi-blast-2.12.0+
-
-inputfasta=${1}
-blastdb=${2}
-outputfile=${3}
-
-
-blastx -query ${inputfasta} \
--db ${blastdb} \
--outfmt 6 \
--max_target_seqs 200 \
--evalue 1e-15 \
--out ${outputfile}
-```
 
 
 _I will leave this here in case I have to go back to this script that will grab all the genes identified for Natricidae_
