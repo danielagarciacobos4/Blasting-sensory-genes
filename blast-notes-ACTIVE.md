@@ -75,7 +75,7 @@ Important notes to consider about the previous script:
   
 <img width="594" alt="Screenshot 2024-02-06 at 5 07 51 PM" src="https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/c9a64bdf-3af9-47fc-83c3-8f372265ed3e">
 
-#### Step 2) Change our protein fasta file into a database file
+## Step 2) Change our protein fasta file into a database file
 
 Blast will not run against a fasta file. This is why we have to transform our fasta file into a database using the following command: 
 
@@ -89,40 +89,55 @@ The output of this command will be different types of files. Something like this
 <img width="726" alt="Screenshot 2024-02-07 at 12 05 25 PM" src="https://github.com/danielagarciacobos4/Blasting-sensory-genes/assets/67153479/25c0286c-905d-4693-bb04-238042438cf4">
 
 
-#### Step 3) Run blast using the assembled genomes of _Nerodia clarkii_ (sequenced and assembled by Leroy Nunez) as our query against the opsin gene db of snakes
+## Step 3) Run blast Genome (query) vs Opsins (database)
 
-Now we will run the blast between the _Nerodia clarkii_ genome and protein database containing all the searches of snake's opsins in NCBI. 
-
+This is an example using the _Liodytes alleni_ genome and opsin protein database. Scripts name: L.alleni_ib.sh
+_Credits to Joe Arguelles for elaborating this script_
 ```
-!/bin/bash
+#!/bin/bash
 #PBS -q batch
 #PBS -l select=1:ncpus=25
 #PBS -m abe
-#PBS -o /home/dgarcia/nas4/thamnophini_genomes/TMP/Th.olog
-#PBS -e /home/dgarcia/nas4/thamnophini_genomes/TMP/Th.elog
+#PBS -o /home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/TMP
+#PBS -e /home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/TMP
 #PBS -M dgarcia@amnh.org
-#PBS -q batch
-#PBS -N opsin
-#PBS -l walltime=6:00:00
+#PBS -N L.alleni_IB
 
-cd /home/dgarcia/nas4/thamnophini_genomes/blast_scripts
+#PBS -l walltime=9999:00:00
 
+
+#SET VARIABLES
+WORKDIR=/home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/Results #working directory
+SPECIES="L.alleni_June16" #species name/abbreviation for output
+DB=/home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/proteins_database/opsin_protein_snakes.fasta #path to nr database (if local) or just 'nr' if running online
+NAME="initialBLAST" #keyword for BLAST output
+IN=/home/dgarcia/nas4/phd/HAL_Thamnophini/Fastas/Liodytes_alleni.fasta #infile, auto-generated
+OUT=${WORKDIR}/${SPECIES}_${NAME}.txt #output name, auto-generated
+
+
+cd $WORKDIR
 module load ncbi-blast-2.12.0+
 
-blastx -query /home/dgarcia/nas4/thamnophini_genomes/Nerodia_clarkii_AMNH_R500948_sma.fa -db /home/dgarcia/nas4/thamnophini_genomes/protein_fasta_files/opsin_protein_snakes.fasta -outfmt 6 -max_target_seqs 200 -evalue 1e-5 -out /home/dgarcia/nas4/thamnophini_genomes/blast_results/results.txt
+blastx -query $IN -db $DB -out $OUT \
+-evalue 1e-10 -max_target_seqs 100 \
+-outfmt "6 qseqid sseqid pident evalue bitscore qstart qend sstart send sacc stitle"
 
 ```
 
 Things to consider for the previous script: 
-- Joe Arguelles suggested creating a TMP folder that will hold all my output errors and notifications. This way, once the job is finished I can just eliminate this folder (#PBS -o and #PBS -e),
+- TMP folder will hold all my output errors and notifications. This way, once the job is finished I can just eliminate this folder (#PBS -o and #PBS -e),
 - outfmt 6 is a type of format in which my results will be executed. For more information search [the manual](https://www.ncbi.nlm.nih.gov/books/NBK279684/table/appendices.T.options_common_to_all_blast/)
 - more on the output format 6 [outfmt 6](https://www.metagenomics.wiki/tools/blast/blastn-output-format-6). Note for next time I do blast: include the "sacc" command to get more straight forward genes names in the output.
 
-I ran this same code for 4 species finding the following general results: 
-- _Nerodia clarkii_: 7143 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
-- _Thamnophis eques_: 7159 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
-- _Regina grahamii_: 7160 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_)
-- _Tropidoclonion lineatum_: 6828 hits within 16 chromosomes (from 18 that exist in _Thamnophis elegans_) 
+I ran this same code for the following species obtaining the following BLAST hits: 
+- _Liodytes alleni_: 1554 hits
+- _Nerodia clarkii_: 1533 hits
+- _Clonophis kirtlandii_: 1529 hits
+- _Natrix natrix_: 1559 hits 
+- _Regina grahamii_: 1522 hits
+- _Tropidoclonion lineatum_: 1539
+
+
 
 ## Second blasting tblastn
 As we can see, our results show a great amount of hits (around 7,000), which makes it difficult to analyze. For this reason, we will try to filter the amount of hits by doing a different search in BLAST (recommended by Jeff W.). In this second approach we will change two main things: 
