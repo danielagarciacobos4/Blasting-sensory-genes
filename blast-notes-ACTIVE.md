@@ -10,11 +10,22 @@ Relevant file locations for these analyses:
 _Genomes- from HAL file_
 ```
 /home/dgarcia/nas4/phd/HAL_Thamnophini/Fastas
-
 ```
 _Snakes opsins database_
 ```
 /home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/proteins_database
+```
+_Scripts for initial BLAST (step ##)_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/Scripts
+```
+_Results of intitial BLAST (step ##)_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/Results
+```
+_List with best BLAST hits from initial BLAST_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/lists
 ```
 
 ### Genome assembly background information
