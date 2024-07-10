@@ -1,6 +1,6 @@
 ## AIM OF BLASTING
 
-The goal of these notes is to document the steps leading up to BLASTing opsin genes in different snake species of the Thamnophini tribe that differ in their habitats (eg. aquatic, terrestrial, and semi-fossorial). This script was useful for locating the coordinates of the opsin genes in the genome, however, I was unable to extract the CDS regions for selection analysis. To extract CDS regions I had to use haLiftover, using the HAL file that resulted from the CACTUS alignment (genome assemblies and alignments where done by Leroy Nunez using the annotated genome of _Thamnophis elegans_ as reference). 
+The goal of these notes is to document the steps leading up to BLASTing opsin genes in different snake species of the Thamnophini tribe that differ in their habitats (eg. aquatic, terrestrial, and semi-fossorial). This script was useful for locating the coordinates of the opsin genes in the genome, however, I was unable to extract the CDS regions for selection analysis. To extract CDS regions I had to use haLiftover, using the HAL file that resulted from the CACTUS alignment (genome assemblies and alignments where done by Leroy Nunez using the annotated genome of _Thamnophis elegans_ as [reference](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/35005/). 
 
 ## 2/2/2024; General Information and File Setup
 
