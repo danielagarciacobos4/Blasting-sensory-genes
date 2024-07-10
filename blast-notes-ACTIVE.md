@@ -12,6 +12,10 @@ _Genomes- from HAL file_
 /home/dgarcia/nas4/phd/HAL_Thamnophini/Fastas
 
 ```
+_Snakes opsins database_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/proteins_database
+```
 
 ### Genome assembly background information
 [add from Dylan's pseudo-it shoer-read assembly pipeline later, credit her]
