@@ -11,7 +11,7 @@ _Genomes- from HAL file_
 ```
 /home/dgarcia/nas4/phd/HAL_Thamnophini/Fastas
 ```
-_Snakes opsins database_
+_Snakes opsins database (step #1)_
 ```
 /home/dgarcia/nas4/phd/opsins/BLAST/initial_Blast/proteins_database
 ```
@@ -41,12 +41,7 @@ _BITS extracted from genome_
 /home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/BITS/final_bits
 ```
 
-### Genome assembly background information
-[add from Dylan's pseudo-it shoer-read assembly pipeline later, credit her]
-
-### BLAST Workflow for opsin related genes
-
-#### Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
+## Step 1) Create a curated database of relevant protein sequences from NCBI. Here we are interested specifically in opsins genes.
 
 Script for pulling these genes from NCBI using [the edirect package](https://www.nlm.nih.gov/dataguide/edirect/documentation.html) in commandline. This manual is aslo helpfull [Entrez Direct Examples](https://www.ncbi.nlm.nih.gov/books/NBK565821/) This script uses the esearch function to query for particular taxa or gene name, and then pipes the search results into the efetch function, which saves the results into a fasta locally. Our cluster at AMNH does not have the edirect package, so we has to install it in our miniconda environment. Just a reminder of how to use [PBS scripts](https://latisresearch.umn.edu/creating-a-PBS-script).
 
