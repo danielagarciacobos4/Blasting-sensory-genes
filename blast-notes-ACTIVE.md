@@ -27,6 +27,14 @@ _List with best BLAST hits from initial BLAST_
 ```
 /home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/lists
 ```
+_Scripts for second BLAST_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/scripts
+```
+_Results for second BLAST_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/results
+```
 
 ### Genome assembly background information
 [add from Dylan's pseudo-it shoer-read assembly pipeline later, credit her]
