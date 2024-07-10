@@ -139,7 +139,10 @@ An example of number of hits for some of the species I ran the code for:
 
 ## Step 4) Filter the best hits from step 3 (sort and eliminate duplicated coordinates)
 The ~ 1500 hits in the genomes will contain duplicated coordinated or very nearby coordinates. We want to sort and reduce the best unique coordinates. For this, we need to sort and eliminate duplicates. The following steps are done in EXCEL (ideally we can find another way to optimize this step). 
--
+  1) Rounded to 1000 the start coordinate =MROUND(cell,1000)
+  2) Sort the file by: a) Chromosome name, b) rounded coordinate, c) best bit score (largest to smallest), d) e-value (smallest to largest)
+  3) Eliminate all duplicates considering the rounded coordinate
+  4) Move 
 
 
 
