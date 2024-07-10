@@ -35,6 +35,11 @@ _Results for second BLAST_
 ```
 /home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/results
 ```
+_BITS extracted from genome_
+```
+/home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/BITS/initial_bits
+/home/dgarcia/nas4/phd/opsins/BLAST/second_Blast/BITS/final_bits
+```
 
 ### Genome assembly background information
 [add from Dylan's pseudo-it shoer-read assembly pipeline later, credit her]
