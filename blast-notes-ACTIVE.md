@@ -145,6 +145,8 @@ The ~ 1500 hits in the genomes will contain duplicated coordinated or very nearb
   4) Add +1000 right to end coordinate and -1000 left to start region. This will grab the possible flanking regions of opsin gene that BLAST did not find
   5) Create a txt file listing these filter hits by: Chromosome, start position, end position
 
+## Step 5) Extract best hits from the genome using samtools
+
 
 
 
